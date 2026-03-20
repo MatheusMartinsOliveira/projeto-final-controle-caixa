@@ -76,6 +76,8 @@ public class Movimentacao extends javax.swing.JFrame {
 
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Venda", "Despesa" }));
 
+        btnEditar.setBackground(new java.awt.Color(255, 153, 51));
+        btnEditar.setForeground(new java.awt.Color(0, 0, 0));
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +85,8 @@ public class Movimentacao extends javax.swing.JFrame {
             }
         });
 
+        btnVoltar.setBackground(new java.awt.Color(204, 255, 255));
+        btnVoltar.setForeground(new java.awt.Color(0, 0, 0));
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +94,8 @@ public class Movimentacao extends javax.swing.JFrame {
             }
         });
 
+        btnExcluir.setBackground(new java.awt.Color(204, 0, 51));
+        btnExcluir.setForeground(new java.awt.Color(0, 0, 0));
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +103,8 @@ public class Movimentacao extends javax.swing.JFrame {
             }
         });
 
+        btnAdicionar.setBackground(new java.awt.Color(51, 255, 51));
+        btnAdicionar.setForeground(new java.awt.Color(0, 0, 0));
         btnAdicionar.setText("Adicionar/salvar");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
