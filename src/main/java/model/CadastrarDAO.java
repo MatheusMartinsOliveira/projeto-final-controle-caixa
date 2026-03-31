@@ -70,6 +70,7 @@ public class CadastrarDAO {
             stmt.setString(2, atualizar.getTipo_movimentacao());
             stmt.setDouble(3, atualizar.getValor_movimentacao());
             stmt.setDate(4, atualizar.getData_movimentacao());
+            stmt.setInt(5, atualizar.getId_movimentacao());
             stmt.executeUpdate();
         } catch (SQLException e){
         e.printStackTrace();

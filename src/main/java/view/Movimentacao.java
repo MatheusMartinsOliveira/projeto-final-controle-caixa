@@ -4,6 +4,10 @@
  */
 package view;
 
+
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 import model.CadastrarBean;
 import model.CadastrarDAO;
@@ -17,24 +21,24 @@ public class Movimentacao extends javax.swing.JFrame {
     /**
      * Creates new form Movimentacao
      */
+    int id_linha_selecionada = 0;
     private Inicio telaInicio;
     public Movimentacao() {
         initComponents();
         carregarTabela();
     }
+    
     public Movimentacao(Inicio telaInicio) {
         initComponents();
         this.telaInicio = telaInicio;
         carregarTabela();
+        tabelaMovimentacoes.addMouseListener(new MouseAdapter(){
+        
+        });
     }
-    private void limparCampos() {
-    txtDescricao.setText("");
-    txtValor.setText("");
-    cbTipo.setSelectedIndex(0);
-    txtDescricao.requestFocus();
-}
+
     private void carregarTabela() {
-    javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) jTable1.getModel();
+    javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tabelaMovimentacoes.getModel();
     model.setRowCount(0); // limpa a tabela
 
     CadastrarDAO dao = new CadastrarDAO();
@@ -60,21 +64,17 @@ public class Movimentacao extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        cbTipo = new javax.swing.JComboBox<>();
         btnEditar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnAdicionar = new javax.swing.JButton();
-        txtDescricao = new javax.swing.JTextField();
-        txtValor = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaMovimentacoes = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(252, 252, 252));
-
-        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Venda", "Despesa" }));
 
         btnEditar.setBackground(new java.awt.Color(255, 153, 51));
         btnEditar.setForeground(new java.awt.Color(0, 0, 0));
@@ -105,18 +105,14 @@ public class Movimentacao extends javax.swing.JFrame {
 
         btnAdicionar.setBackground(new java.awt.Color(51, 255, 51));
         btnAdicionar.setForeground(new java.awt.Color(0, 0, 0));
-        btnAdicionar.setText("Adicionar/salvar");
+        btnAdicionar.setText("Adicionar");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarActionPerformed(evt);
             }
         });
 
-        txtDescricao.setText("Produto");
-
-        txtValor.setText("Valor");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaMovimentacoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -139,50 +135,47 @@ public class Movimentacao extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaMovimentacoes);
+
+        jLabel4.setFont(new java.awt.Font("Baskerville Old Face", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Gerenciamento de Movimentações");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addContainerGap(63, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(88, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cbTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtDescricao)
-                            .addComponent(txtValor))
-                        .addGap(102, 102, 102)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAdicionar)
-                            .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnExcluir, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnVoltar, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(17, 17, 17))))
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAdicionar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(17, 17, 17))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdicionar))
+                    .addComponent(btnAdicionar)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEditar)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditar))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir))
-                .addGap(18, 18, 18)
-                .addComponent(btnVoltar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnExcluir)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVoltar)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -198,48 +191,12 @@ public class Movimentacao extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
-        
-                                                  
-    try {
-        String descricao = txtDescricao.getText().trim();
-        String tipo = cbTipo.getSelectedItem().toString();
-        String valorTexto = txtValor.getText().trim().replace(",", ".");
-
-        if (descricao.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Preencha a descrição!");
-            return;
-        }
-
-        if (valorTexto.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Preencha o valor!");
-            return;
-        }
-
-        double valor = Double.parseDouble(valorTexto);
-
-        CadastrarBean cadastro = new CadastrarBean();
-        cadastro.setDescricao_movimentacao(descricao);
-        cadastro.setTipo_movimentacao(tipo);
-        cadastro.setValor_movimentacao(valor);
-        cadastro.setData_movimentacao(new java.sql.Date(System.currentTimeMillis()));
-
-        CadastrarDAO dao = new CadastrarDAO();
-        dao.cadastrar(cadastro);
-
-        JOptionPane.showMessageDialog(this, "Movimentação cadastrada com sucesso!");
-        limparCampos();
-        carregarTabela();
-
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Digite um valor válido! Ex: 10,50");
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage());
-    }
-
+        new Adicionar().setVisible(true);
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -259,60 +216,14 @@ public class Movimentacao extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-                                               
-                                             
-    try {
-        int linha = jTable1.getSelectedRow();
-
-        if (linha == -1) {
-            JOptionPane.showMessageDialog(this, "Selecione uma movimentação na tabela para editar!");
-            return;
-        }
-
-        String descricao = txtDescricao.getText().trim();
-        String tipo = cbTipo.getSelectedItem().toString();
-        String valorTexto = txtValor.getText().trim().replace(",", ".");
-
-        if (descricao.isEmpty() || descricao.equalsIgnoreCase("Descricao")) {
-            JOptionPane.showMessageDialog(this, "Preencha a descrição!");
-            return;
-        }
-
-        if (valorTexto.isEmpty() || valorTexto.equalsIgnoreCase("Valor")) {
-            JOptionPane.showMessageDialog(this, "Preencha o valor!");
-            return;
-        }
-
-        double valor = Double.parseDouble(valorTexto);
-        int id = Integer.parseInt(jTable1.getValueAt(linha, 0).toString());
-
-        CadastrarBean cadastro = new CadastrarBean();
-        cadastro.setId_movimentacao(id);
-        cadastro.setDescricao_movimentacao(descricao);
-        cadastro.setTipo_movimentacao(tipo);
-        cadastro.setValor_movimentacao(valor);
-        cadastro.setData_movimentacao(new java.sql.Date(System.currentTimeMillis()));
-
-        CadastrarDAO dao = new CadastrarDAO();
-        dao.atualizar(cadastro);
-
-        JOptionPane.showMessageDialog(this, "Movimentação atualizada com sucesso!");
-        carregarTabela();
-        limparCampos();
-
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Digite um valor válido! Ex: 10,50");
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Erro ao editar: " + e.getMessage());
-    
-}
+        new Editar().setVisible(true);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
                                                  
     try {
-        int linha = jTable1.getSelectedRow();
+        int linha = tabelaMovimentacoes.getSelectedRow();
 
         if (linha == -1) {
             JOptionPane.showMessageDialog(this, "Selecione uma movimentação para excluir!");
@@ -330,14 +241,13 @@ public class Movimentacao extends javax.swing.JFrame {
             return;
         }
 
-        int id = Integer.parseInt(jTable1.getValueAt(linha, 0).toString());
+        int id = Integer.parseInt(tabelaMovimentacoes.getValueAt(linha, 0).toString());
 
         CadastrarDAO dao = new CadastrarDAO();
         dao.excluir(id);
 
         JOptionPane.showMessageDialog(this, "Movimentação excluída com sucesso!");
         carregarTabela();
-        limparCampos();
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Erro ao excluir: " + e.getMessage());
@@ -385,11 +295,9 @@ public class Movimentacao extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JComboBox<String> cbTipo;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txtDescricao;
-    private javax.swing.JTextField txtValor;
+    private javax.swing.JTable tabelaMovimentacoes;
     // End of variables declaration//GEN-END:variables
 }

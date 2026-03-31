@@ -20,6 +20,8 @@ public class Cadastro extends javax.swing.JFrame {
      */
     public Cadastro() {
         initComponents();
+        
+        
     }
 
     /**
@@ -43,11 +45,11 @@ public class Cadastro extends javax.swing.JFrame {
         cadastroSenha = new javax.swing.JPasswordField();
         mostrarSenha = new javax.swing.JCheckBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(252, 252, 252));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Cadastro de Usuários");
@@ -151,6 +153,7 @@ public class Cadastro extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Clickar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Clickar
@@ -174,16 +177,24 @@ public class Cadastro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "O campo Usuário não pode ser vazio!");
         } else if(cadastroSenha.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "O campo Senha não pode ser vazio!");
-        } else{
+        } else if(cadastroNome.getText().length() < 8){
+        JOptionPane.showMessageDialog(null, "O nome precisa conter pelo menos 8 caracteres!");
+        } else if(cadastroUsuario.getText().length() < 8){
+        JOptionPane.showMessageDialog(null, "O usuário precisa conter pelo menos 8 caracteres!");
+        } else if(cadastroSenha.getText().length() < 8){
+        JOptionPane.showMessageDialog(null, "A senha precisa conter pelo menos 8 caracteres!");
+        }
+        else{
             UsuarioDAO dao = new UsuarioDAO();
             dao.cadastrar(usuarios);
             JOptionPane.showMessageDialog(null, "Usuário "+cadastroUsuario.getText()+" inserido com sucesso! ");
             new Login().setVisible(true);
             this.setVisible(false);
-}
+}       
         cadastroNome.setText("");
         cadastroUsuario.setText("");
         cadastroSenha.setText("");
+        
         
         
     }//GEN-LAST:event_botaoCadastroActionPerformed
