@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.CadastrarBean;
 import model.CadastrarDAO;
+import model.UsuarioLogado;
 /**
  *
  * @author farma
@@ -69,6 +70,7 @@ public void popularTabela(String produto, double valor) {
 
     historicoTransacoes.getColumnModel().getColumn(3).setCellRenderer(moedaCentralizada);
 }
+    
     public void carregarTabelaHistorico() {
     javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) historicoTransacoes.getModel();
     model.setRowCount(0);
@@ -100,11 +102,21 @@ public void popularTabela(String produto, double valor) {
         java.text.NumberFormat moedaBR = java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("pt", "BR"));
         lblSaldoDiario.setText("Saldo diário: " + moedaBR.format(saldo));
     }
-        public Inicio() {
+    
+    public Inicio() {
+        
+        if(UsuarioLogado.getId() > 0){
+        setTitle("Controle de Caixas - Bem-vindo, " + UsuarioLogado.getNome());
         initComponents();
         configurarTabela();
         carregarTabelaHistorico();
         atualizarSaldoDiario();
+        
+    }   else{
+            new Login().setVisible(true);
+            this.dispose();
+        }
+        
     }
     
     /**
@@ -233,7 +245,7 @@ public void popularTabela(String produto, double valor) {
 
     private void btnTestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestarActionPerformed
         // TODO add your handling code here:
-        new Movimentacao(this).setVisible(true);
+        new Movimentacao().setVisible(true);
     }//GEN-LAST:event_btnTestarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

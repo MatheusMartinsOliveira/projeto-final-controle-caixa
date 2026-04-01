@@ -7,6 +7,7 @@ package view;
 import javax.swing.JOptionPane;
 import model.UsuarioBean;
 import model.UsuarioDAO;
+import model.UsuarioLogado;
 import view.Login;
 
 /**
@@ -19,8 +20,13 @@ public class Cadastro extends javax.swing.JFrame {
      * Creates new form Cadastro
      */
     public Cadastro() {
-        initComponents();
-        
+        if(UsuarioLogado.getId() > 0){
+            setTitle("Cadastro de Usuários - Bem-vindo, " + UsuarioLogado.getNome());
+            initComponents();
+        } else{
+            new Login().setVisible(true);
+            this.dispose();
+        }
         
     }
 
@@ -44,6 +50,9 @@ public class Cadastro extends javax.swing.JFrame {
         voltarLogin = new javax.swing.JLabel();
         cadastroSenha = new javax.swing.JPasswordField();
         mostrarSenha = new javax.swing.JCheckBox();
+        jLabel5 = new javax.swing.JLabel();
+        txtConfirmarSenha = new javax.swing.JPasswordField();
+        mostrarSenha1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -88,6 +97,17 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Confirmar Senha:");
+
+        mostrarSenha1.setForeground(new java.awt.Color(0, 0, 0));
+        mostrarSenha1.setText("Mostrar Senha");
+        mostrarSenha1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarSenha1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -100,20 +120,23 @@ public class Cadastro extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mostrarSenha)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(cadastroNome, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
                                 .addComponent(cadastroUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
-                                .addComponent(cadastroSenha))))
+                                .addComponent(cadastroSenha)
+                                .addComponent(mostrarSenha))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mostrarSenha1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(117, 117, 117)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(voltarLogin)
                             .addComponent(botaoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,13 +155,19 @@ public class Cadastro extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(cadastroSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(mostrarSenha)
-                .addGap(67, 67, 67)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(txtConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(mostrarSenha1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(botaoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(voltarLogin)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,6 +197,7 @@ public class Cadastro extends javax.swing.JFrame {
         usuarios.setNome(cadastroNome.getText());
         usuarios.setUsuario(cadastroUsuario.getText());
         usuarios.setSenha(cadastroSenha.getText());
+        usuarios.setConfirmarSenha(txtConfirmarSenha.getText());
         
         if(cadastroNome.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "O campo Nome não pode ser vazio!");
@@ -183,6 +213,10 @@ public class Cadastro extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "O usuário precisa conter pelo menos 8 caracteres!");
         } else if(cadastroSenha.getText().length() < 8){
         JOptionPane.showMessageDialog(null, "A senha precisa conter pelo menos 8 caracteres!");
+        } else if(!cadastroSenha.getText().equals(txtConfirmarSenha.getText())){
+            JOptionPane.showMessageDialog(null, "As senhas não correspodem!");
+            cadastroSenha.setText("");
+            txtConfirmarSenha.setText("");
         }
         else{
             UsuarioDAO dao = new UsuarioDAO();
@@ -207,6 +241,16 @@ public class Cadastro extends javax.swing.JFrame {
             cadastroSenha.setEchoChar('*'); // esconde a senha
         }
     }//GEN-LAST:event_mostrarSenhaActionPerformed
+
+    private void mostrarSenha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarSenha1ActionPerformed
+        // TODO add your handling code here:
+        if (mostrarSenha1.isSelected()) {
+            txtConfirmarSenha.setEchoChar((char) 0); // mostra a senha
+        } else {
+            txtConfirmarSenha.setEchoChar('*'); // esconde a senha
+        
+        }                
+    }//GEN-LAST:event_mostrarSenha1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,8 +296,11 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JCheckBox mostrarSenha;
+    private javax.swing.JCheckBox mostrarSenha1;
+    private javax.swing.JPasswordField txtConfirmarSenha;
     private javax.swing.JLabel voltarLogin;
     // End of variables declaration//GEN-END:variables
 }

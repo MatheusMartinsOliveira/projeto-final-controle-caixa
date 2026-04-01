@@ -7,6 +7,7 @@ package view;
 import model.CadastrarDAO;
 import model.CadastrarBean;
 import javax.swing.JOptionPane;
+import model.UsuarioLogado;
 
 /**
  *
@@ -18,7 +19,14 @@ public class Adicionar extends javax.swing.JFrame {
      * Creates new form Adicionar
      */
     public Adicionar() {
-        initComponents();
+        if(UsuarioLogado.getId() > 0){
+            setTitle("Adicionar Produto - Bem-vindo, " + UsuarioLogado.getNome());
+            initComponents();
+        } else{
+            new Login().setVisible(true);
+            this.dispose();
+        }
+        
     }
     private void limparCampos() {
     txtDescricao.setText("");

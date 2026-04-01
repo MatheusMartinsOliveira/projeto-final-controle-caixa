@@ -15,6 +15,7 @@ model\UsuarioDAO.class
 view\Editar$2.class
 view\Movimentacao$1.class
 model\CadastrarBean.class
+view\Cadastro$5.class
 view\Movimentacao$6.class
 view\Inicio$5.class
 historico\Transacoes.class
@@ -32,6 +33,7 @@ view\Cadastro$2.class
 view\Adicionar$1.class
 view\Adicionar.class
 view\Movimentacao$5.class
+model\UsuarioLogado.class
 view\Editar$3.class
 view\Login.class
 view\Inicio$4.class

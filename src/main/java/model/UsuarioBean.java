@@ -13,16 +13,18 @@ public class UsuarioBean {
     private String nome;
     private String usuario;
     private String senha;
+    private String confirmarSenha;
     private boolean admin;
 
     public UsuarioBean() {
     }
 
-    public UsuarioBean(int id, String nome, String usuario, String senha, boolean admin) {
+    public UsuarioBean(int id, String nome, String usuario, String senha, String confirmarSenha, boolean admin) {
         this.id = id;
         this.nome = nome;
         this.usuario = usuario;
         this.senha = senha;
+        this.confirmarSenha = confirmarSenha;
         this.admin = admin;
     }
 
@@ -58,6 +60,14 @@ public class UsuarioBean {
         this.senha = senha;
     }
 
+    public String getConfirmarSenha() {
+        return confirmarSenha;
+    }
+
+    public void setConfirmarSenha(String confirmarSenha) {
+        this.confirmarSenha = confirmarSenha;
+    }
+
     public boolean isAdmin() {
         return admin;
     }
@@ -65,6 +75,7 @@ public class UsuarioBean {
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
+
     
     
 }

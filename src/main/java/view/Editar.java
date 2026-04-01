@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import model.CadastrarBean;
 import model.CadastrarDAO;
+import model.UsuarioLogado;
 
 /**
  *
@@ -22,8 +23,10 @@ public class Editar extends javax.swing.JFrame {
      */
     int id_linha_selecionada = 0;
     public Editar() {
-        initComponents();
-        carregarTabela();
+        if(UsuarioLogado.getId() > 0){
+            setTitle("Adicionar Produto - Bem-vindo, " + UsuarioLogado.getNome());
+            initComponents();
+            carregarTabela();
         tabelaMovimentacoes.addMouseListener(new MouseAdapter(){
         
         public void mouseClicked(MouseEvent e){
@@ -35,6 +38,11 @@ public class Editar extends javax.swing.JFrame {
             }
         }
         });
+        } else{
+            new Login().setVisible(true);
+            this.dispose();
+        }
+        
     
     }
     public void linhaSelecionada() {

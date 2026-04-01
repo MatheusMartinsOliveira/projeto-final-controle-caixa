@@ -8,6 +8,7 @@ import conexao.Conexao;
 import javax.swing.JOptionPane;
 import model.UsuarioBean;
 import model.UsuarioDAO;
+import model.UsuarioLogado;
 
 /**
  *
@@ -41,6 +42,7 @@ public class Login extends javax.swing.JFrame {
         mostrarSenha = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Login");
 
         jPanel1.setBackground(new java.awt.Color(252, 252, 252));
 
@@ -153,7 +155,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLoginActionPerformed
-        // TODO add your handling code here:
+         // TODO add your handling code here:
         String currentUser = loginUsuario.getText().trim();
         String currentSenha = loginSenha.getText().trim();
         
@@ -168,8 +170,11 @@ public class Login extends javax.swing.JFrame {
             UsuarioDAO dao = new UsuarioDAO();
             UsuarioBean usuarioLogado = dao.logar(currentUser, currentSenha);
             if(usuarioLogado.getId() > 0) {
+                UsuarioLogado.setId(usuarioLogado.getId());
+                UsuarioLogado.setNome(usuarioLogado.getNome());
                 new Inicio().setVisible(true);
                 this.setVisible(false);
+                
             } else{
                 JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos, tente novamente!");
             }

@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 import model.CadastrarBean;
 import model.CadastrarDAO;
+import model.UsuarioLogado;
 
 /**
  *
@@ -21,21 +22,22 @@ public class Movimentacao extends javax.swing.JFrame {
     /**
      * Creates new form Movimentacao
      */
-    int id_linha_selecionada = 0;
     private Inicio telaInicio;
     public Movimentacao() {
-        initComponents();
-        carregarTabela();
-    }
-    
-    public Movimentacao(Inicio telaInicio) {
-        initComponents();
+        if(UsuarioLogado.getId() > 0){
+            initComponents();
         this.telaInicio = telaInicio;
         carregarTabela();
         tabelaMovimentacoes.addMouseListener(new MouseAdapter(){
-        
         });
+        } else{
+            new Login().setVisible(true);
+            this.dispose();
+        }
+        
+        
     }
+
 
     private void carregarTabela() {
     javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tabelaMovimentacoes.getModel();
