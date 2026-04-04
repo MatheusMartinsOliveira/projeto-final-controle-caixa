@@ -26,6 +26,7 @@ public class Movimentacao extends javax.swing.JFrame {
     public Movimentacao() {
         if(UsuarioLogado.getId() > 0){
             initComponents();
+            setTitle("Gerenciar Movimentações, Bem vindo " + UsuarioLogado.getNome());
         this.telaInicio = telaInicio;
         carregarTabela();
         tabelaMovimentacoes.addMouseListener(new MouseAdapter(){

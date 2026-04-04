@@ -21,7 +21,7 @@ public class Cadastro extends javax.swing.JFrame {
      */
     public Cadastro() {
         if(UsuarioLogado.getId() > 0){
-            setTitle("Cadastro de Usuários - Bem-vindo, " + UsuarioLogado.getNome());
+            setTitle("Cadastro de Usuários");
             initComponents();
         } else{
             new Login().setVisible(true);

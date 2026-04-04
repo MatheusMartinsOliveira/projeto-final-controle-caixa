@@ -64,6 +64,11 @@ public class Adicionar extends javax.swing.JFrame {
         jLabel3.setText("Tipo:");
 
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vendas", "Despesa" }));
+        cbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoActionPerformed(evt);
+            }
+        });
 
         btnCadastrar.setBackground(new java.awt.Color(51, 255, 51));
         btnCadastrar.setForeground(new java.awt.Color(0, 0, 0));
@@ -211,6 +216,10 @@ public class Adicionar extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTipoActionPerformed
 
     /**
      * @param args the command line arguments

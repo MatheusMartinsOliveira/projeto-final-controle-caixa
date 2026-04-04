@@ -37,7 +37,9 @@ model\UsuarioLogado.class
 view\Editar$3.class
 view\Login.class
 view\Inicio$4.class
+view\Inicio$6.class
 view\Movimentacao.class
 view\Cadastro$1.class
 view\Cadastro$4.class
+view\Adicionar$4.class
 view\Cadastro.class

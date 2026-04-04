@@ -24,7 +24,7 @@ public class Editar extends javax.swing.JFrame {
     int id_linha_selecionada = 0;
     public Editar() {
         if(UsuarioLogado.getId() > 0){
-            setTitle("Adicionar Produto - Bem-vindo, " + UsuarioLogado.getNome());
+            setTitle("Editar Produto - Bem-vindo, " + UsuarioLogado.getNome());
             initComponents();
             carregarTabela();
         tabelaMovimentacoes.addMouseListener(new MouseAdapter(){
