@@ -80,6 +80,8 @@ public void popularTabela(String produto, double valor) {
     CadastrarDAO dao = new CadastrarDAO();
 
     for (CadastrarBean c : dao.listar()) {
+        LocalDate localDate = c.getData_movimentacao().toLocalDate();
+        if(localDate.getMonthValue() == cbFiltroMes.getSelectedIndex() + 1){
         Object[] linha = {
             c.getId_movimentacao(),
             c.getDescricao_movimentacao(),
@@ -88,6 +90,7 @@ public void popularTabela(String produto, double valor) {
             c.getData_movimentacao()
         };
         model.addRow(linha);
+        }  
     }
 }
     public void atualizarSaldoDiario(){ 
@@ -270,6 +273,7 @@ public void popularTabela(String produto, double valor) {
     private void cbFiltroMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroMesActionPerformed
         // TODO add your handling code here:
         atualizarSaldoDiario();
+        carregarTabelaHistorico();
     }//GEN-LAST:event_cbFiltroMesActionPerformed
 
     /**
