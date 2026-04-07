@@ -184,7 +184,7 @@ public class Login extends javax.swing.JFrame {
     private void Clickar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Clickar
         // TODO add your handling code here:
         new Cadastro().setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_Clickar
 
     private void mostrarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarSenhaActionPerformed

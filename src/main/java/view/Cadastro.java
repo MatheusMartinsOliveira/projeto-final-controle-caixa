@@ -20,9 +20,10 @@ public class Cadastro extends javax.swing.JFrame {
      * Creates new form Cadastro
      */
     public Cadastro() {
+        initComponents();
         if(UsuarioLogado.getId() > 0){
             setTitle("Cadastro de Usuários");
-            initComponents();
+            
         } else{
             new Login().setVisible(true);
             this.dispose();
@@ -188,7 +189,7 @@ public class Cadastro extends javax.swing.JFrame {
     private void Clickar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Clickar
         // TODO add your handling code here:
         new Login().setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_Clickar
 
     private void botaoCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastroActionPerformed
@@ -223,7 +224,7 @@ public class Cadastro extends javax.swing.JFrame {
             dao.cadastrar(usuarios);
             JOptionPane.showMessageDialog(null, "Usuário "+cadastroUsuario.getText()+" inserido com sucesso! ");
             new Login().setVisible(true);
-            this.setVisible(false);
+            this.dispose();
 }       
         cadastroNome.setText("");
         cadastroUsuario.setText("");
